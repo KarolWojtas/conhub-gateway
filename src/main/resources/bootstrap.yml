@@ -1,0 +1,19 @@
+server:
+  port: 8765
+spring:
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVER_HOST:localhost}:8888
+  application:
+    name: conhub-gateway    
+zuul:
+  sensitive-headers:
+  - Cookie
+  - Set-Cookie
+  routes:
+    conhub-auth-server:
+     path: "/uaa/**"
+     serviceId: conhub-auth-server
+     
+
+  
