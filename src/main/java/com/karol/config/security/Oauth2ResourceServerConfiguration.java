@@ -23,7 +23,7 @@ public class Oauth2ResourceServerConfiguration extends ResourceServerConfigurerA
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/uaa/oauth/token").permitAll()
+			.antMatchers("/uaa/oauth/token","/users/**").permitAll()
 			.antMatchers("/**").authenticated()
 			.and().csrf().disable();
 	}
