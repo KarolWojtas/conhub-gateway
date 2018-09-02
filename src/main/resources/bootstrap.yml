@@ -1,11 +1,23 @@
 server:
   port: 8765
 spring:
-  cloud:
-    config:
-      uri: http://${CONFIG_SERVER_HOST:localhost}:8888
-  application:
+ cloud:
+     config:
+      discovery:
+        enabled: true
+        service-id: conhub-config-server
+ application:
     name: conhub-gateway  
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: true
+    registryFetchIntervalSeconds: 5
+    should-enforce-registration-at-init: true
+    service-url:
+      defaultZone: http://${EUREKA_SERVER_HOST:localhost}:8761/eureka
+  instance:
+    leaseRenewalIntervalInSeconds: 10
 
 
      

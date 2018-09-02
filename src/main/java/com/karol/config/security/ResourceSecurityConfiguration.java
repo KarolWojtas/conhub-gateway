@@ -2,17 +2,19 @@ package com.karol.config.security;
 
 import java.io.IOException;
 
+
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationManager;
+import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -20,7 +22,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.util.FileCopyUtils;
 @Configuration
-@EnableWebSecurity
 public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Bean
 	@Override
@@ -56,5 +57,13 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
         defaultTokenServices.setTokenStore(jwtTokenStore());
         return defaultTokenServices;
     }
+	
+	 @Bean
+	    public OAuth2WebSecurityExpressionHandler oauth2WebSecurityExpressionHandler(ApplicationContext applicationContext) {
+	        OAuth2WebSecurityExpressionHandler expressionHandler = new OAuth2WebSecurityExpressionHandler();
+	        expressionHandler.setApplicationContext(applicationContext);
+	        return expressionHandler;
+	    }
+	
 
 }
