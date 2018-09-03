@@ -34,6 +34,7 @@ public class Oauth2ResourceServerConfiguration extends ResourceServerConfigurerA
 			.antMatchers("/users/{username}","/users/{username}/**")
 				.access("@pathAccessService.usernameEqualsPrincipal(authentication,#username)")
 			.antMatchers("/uaa/oauth/token").permitAll()
+			.antMatchers(HttpMethod.GET, "/social/**").permitAll()
 			.antMatchers("/**").authenticated()
 			;
 	}

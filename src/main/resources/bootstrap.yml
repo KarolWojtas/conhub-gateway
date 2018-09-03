@@ -2,10 +2,9 @@ server:
   port: 8765
 spring:
  cloud:
-     config:
-      discovery:
-        enabled: true
-        service-id: conhub-config-server
+  cloud:
+    config:
+      enabled: false
  application:
     name: conhub-gateway  
 eureka:
@@ -18,6 +17,21 @@ eureka:
       defaultZone: http://${EUREKA_SERVER_HOST:localhost}:8761/eureka
   instance:
     leaseRenewalIntervalInSeconds: 10
+zuul:
+  sensitive-headers:
+  - Cookie
+  - Set-Cookie
+  routes:
+    conhub-auth-server:
+     path: "/uaa/**"
+     sensitive-headers:
+     serviceId: conhub-auth-server
+    conhub-user-service:
+     path: "/users/**"
+     serviceId: conhub-user-service
+    conhub-social-login-service: 
+     path: "/social/**"
+     serviceId: conhub-social-login-service
 
 
      
