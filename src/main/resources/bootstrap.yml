@@ -2,7 +2,6 @@ server:
   port: 8765
 spring:
  cloud:
-  cloud:
     config:
       enabled: false
  application:
@@ -32,6 +31,10 @@ zuul:
     conhub-social-login-service: 
      path: "/social/**"
      serviceId: conhub-social-login-service
+    conhub-concert-service:
+     path: "/content/**"
+     serviceId: conhub-concert-service
+allowed-origin: http://localhost:4200
 
 
      
