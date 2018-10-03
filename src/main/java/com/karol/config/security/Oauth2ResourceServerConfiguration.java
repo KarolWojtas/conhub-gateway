@@ -35,9 +35,10 @@ public class Oauth2ResourceServerConfiguration extends ResourceServerConfigurerA
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/content/concerts/comments-sse").permitAll()
                 .antMatchers(HttpMethod.GET, "/content/venues/{venueId}").permitAll()
 			.antMatchers(HttpMethod.GET, "/content/venues/{venueId}/avatar").permitAll()
-			.antMatchers(HttpMethod.POST, "/content/venues/{venueId}/avatar").hasRole("ADMIN")
+			//.antMatchers(HttpMethod.POST, "/content/venues/{venueId}/avatar").hasRole("ADMIN")
 			.antMatchers(HttpMethod.PATCH, "/content/venues/{venueId}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/content/venues/{venueId}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/content/concerts").permitAll()
@@ -47,7 +48,7 @@ public class Oauth2ResourceServerConfiguration extends ResourceServerConfigurerA
                 .antMatchers(HttpMethod.DELETE, "/content/concerts/{concertId}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/content/concerts/{concertId}/comments").permitAll()
                 .antMatchers(HttpMethod.POST, "/content/concerts/{concertId}/comments/{username}").access("@pathAccessService.usernameEqualsPrincipal(authentication,#username)")
-                .antMatchers("/content/interests/{username}").access("@pathAccessService.usernameEqualsPrincipal(authentication,#username)")
+                .antMatchers("/content/interests/{username}").permitAll()
 			.antMatchers("/users/auth/**").denyAll()
 			.antMatchers(HttpMethod.GET, "/users/{username}","/users/checkusername/{username}","/users/{username}/avatar").permitAll()
 			.antMatchers(HttpMethod.POST,"/users/").permitAll()

@@ -34,6 +34,10 @@ zuul:
     conhub-concert-service:
      path: "/content/**"
      serviceId: conhub-concert-service
+  ws:
+   brokerages:
+    conhub-concert-service:
+      brokers: '/comments-emitter'
 allowed-origin: http://localhost:4200
 
 
