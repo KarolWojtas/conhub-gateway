@@ -90,12 +90,8 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-security</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.github.mthizo247/spring-cloud-netflix-zuul-websocket -->
-		<dependency>
-			<groupId>com.github.mthizo247</groupId>
-			<artifactId>spring-cloud-netflix-zuul-websocket</artifactId>
-			<version>1.0.7.RELEASE</version>
-		</dependency>
+
+
 
 	</dependencies>
 

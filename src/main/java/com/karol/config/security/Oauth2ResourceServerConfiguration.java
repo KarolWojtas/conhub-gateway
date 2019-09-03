@@ -1,5 +1,6 @@
 package com.karol.config.security;
 
+import com.karol.filters.WebSocketHeaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -35,8 +37,8 @@ public class Oauth2ResourceServerConfiguration extends ResourceServerConfigurerA
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/content/concerts/comments-sse").permitAll()
-                .antMatchers(HttpMethod.GET, "/content/venues/{venueId}").permitAll()
+                .antMatchers( "/content/comments-emitter").permitAll()
+                .antMatchers(HttpMethod.GET, "/content/venues/{venueId}", "/content/venues").permitAll()
 			.antMatchers(HttpMethod.GET, "/content/venues/{venueId}/avatar").permitAll()
 			//.antMatchers(HttpMethod.POST, "/content/venues/{venueId}/avatar").hasRole("ADMIN")
 			.antMatchers(HttpMethod.PATCH, "/content/venues/{venueId}").hasRole("ADMIN")
